@@ -6,6 +6,7 @@
 """
 
 import argparse
+import json
 import os
 
 from google import genai
@@ -96,8 +97,8 @@ if __name__ == "__main__":
         config=generation_config,
     )
 
-    # 応答から結果を取得して出力
-    import json
+    if response.text is None:
+        raise ValueError("Gemini returned empty response")
 
     result_dict = json.loads(response.text)
     result = ip.Output(**result_dict)
