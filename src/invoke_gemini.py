@@ -12,7 +12,7 @@ import os
 from google import genai
 from google.genai import types
 
-import src.input_prompts.input_prompt_for_yachiyo_2026_01_23 as ip
+import src.input_prompts.input_prompt_for_yachiyo_2026_01_14_支承部詳細図及び配筋図 as ip
 import src.utils as utils
 
 
