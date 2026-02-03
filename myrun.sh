@@ -3,9 +3,9 @@
 #uv run python -m src.main
 
 #_/_/_/ 画像一枚をGeminiに投げる。
-ROOT_DIR_PATH="/home/kumada/data/yachiyo_zumen_kanri/"
-IMAGE_SUB_DIR_PATH="images/04_ 〇第1竹田川B　A3"
-FILE_NAME="04_ 〇第1竹田川B　A3_154"
+ROOT_DIR_PATH="/home/kumada/data/depth_image_aligner/"
+IMAGE_SUB_DIR_PATH="images"
+FILE_NAME="S2362_9000509--D"
 OUTPUT_SUB_DIR_PATH="gemini_outputs"
 MAX_TOKENS=8192
 TOP_P=1.0
