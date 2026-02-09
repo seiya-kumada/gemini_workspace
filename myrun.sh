@@ -5,7 +5,7 @@
 #_/_/_/ 画像一枚をGeminiに投げる。
 #ROOT_DIR_PATH="/home/kumada/data/depth_image_aligner/"
 #IMAGE_SUB_DIR_PATH="images"
-#FILE_NAME="A220VC-H01"
+#FILE_NAME="S2362_9000509--D"
 #OUTPUT_SUB_DIR_PATH="gemini_outputs"
 #MAX_TOKENS=8192
 #TOP_P=1.0
@@ -17,7 +17,7 @@
 #    --top_p ${TOP_P} \
 #    --temperature ${TEMPERATURE}
 
-#_/_/_/ 画像一枚をGeminiに投げる。
+#_/_/_/ 動画一本をGeminiに投げる。
 ROOT_DIR_PATH="/home/kumada/data/gemini_workspace/"
 IMAGE_SUB_DIR_PATH="movies"
 FILE_NAME="sample_2"
