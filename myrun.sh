@@ -20,7 +20,7 @@
 #_/_/_/ 動画一本をGeminiに投げる。
 ROOT_DIR_PATH="/home/kumada/data/gemini_workspace/"
 IMAGE_SUB_DIR_PATH="movies"
-FILE_NAME="sample_2"
+FILE_NAME="sample_01"
 OUTPUT_SUB_DIR_PATH="outputs"
 MAX_TOKENS=8192
 TOP_P=1.0
