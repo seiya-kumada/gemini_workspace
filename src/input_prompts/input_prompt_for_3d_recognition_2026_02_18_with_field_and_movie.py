@@ -5,7 +5,7 @@ GPT-4oへの入力プロンプトとレスポンスモデルの定義
 期待されるレスポンスの構造を定義します。
 """
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class Output(BaseModel):
@@ -14,11 +14,11 @@ class Output(BaseModel):
 
     """
 
-    structured_description: str
-    application_description: str
-    process_prediction: str
-    risk_description: str
-    material_description: str
+    structured_description: str = Field(description="物体の形状や構造についての詳細な説明。色や材質には言及しない。")
+    application_description: str = Field(description="構造説明から想定される物体の用途。")
+    process_prediction: str = Field(description="物体を製造するためのプロセスの予測。")
+    risk_description: str = Field(description="物体の構造的リスクの説明。")
+    material_description: str = Field(description="構造や構造的リスクから予測される最適な材質・材料の説明。")
 
 
 # 画像とOCR結果を入力とする場合のプロンプト
@@ -31,11 +31,7 @@ INPUT_PROMPT = (
     "- 最初にx軸周りに回転し、その後y軸、z軸の順に回転します。\n"
     "- 画面奥から手前の方向がz軸です。\n"
     "## 質問 \n"
-    "- その物体について構造の観点から詳細に説明し、structured_descriptionに格納しなさい。色や材質については言及せず、形状や構造について詳しく説明してください。\n"
-    "- 上の構造説明から、その物体の用途をきめ細かく想定し、application_descriptionに格納しなさい。\n"
-    "- その物体を製造するためのプロセスを予測し、process_predictionに格納しなさい。\n"
-    "- その物体の構造的リスクについて説明し、risk_descriptionに格納しなさい。\n"
-    "- 上の構造説明や構造的リスクから適した材質・材料を予測し、material_descriptionに格納しなさい。\n"
+    "- この動画見て各フィールドの説明に従い回答しなさい。\n"
 )
 
 
@@ -52,6 +48,7 @@ def print_output(output: Output):
     print(f"【製造プロセスの予測】{output.process_prediction}")
     print(f"【構造的リスクの説明】{output.risk_description}")
     print(f"【材質・材料の説明】{output.material_description}")
+    print("=======================")
 
 
 def save_to_file(output: Output, output_path: str):
@@ -67,4 +64,4 @@ def save_to_file(output: Output, output_path: str):
         f.write(f"【用途の説明】{output.application_description}\n")
         f.write(f"【製造プロセスの予測】{output.process_prediction}\n")
         f.write(f"【構造的リスクの説明】{output.risk_description}\n")
-        f.write(f"【材質・材料の説明】{output.material_description}\n")
+        f.write(f"【材質・材料の説明】{output.material_description}")

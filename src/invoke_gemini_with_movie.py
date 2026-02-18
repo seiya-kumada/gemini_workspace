@@ -12,7 +12,7 @@ import os
 from google import genai
 from google.genai import types
 
-import src.input_prompts.input_prompt_for_3d_recognition_2026_02_17 as ip
+import src.input_prompts.input_prompt_for_3d_recognition_2026_02_18_with_field_and_movie as ip
 import src.utils as utils
 
 
