@@ -19,9 +19,11 @@ Google Gemini API を使用した画像・動画分析プロジェクト
   - `save_to_file(output: Output, output_path: str)` 関数
 
 ### メインモジュール
-- 画像分析: `src/invoke_gemini.py`
-- 動画分析: `src/invoke_gemini_with_movie.py`
+- 命名規則: `src/invoke_gemini_with_<入力種別>.py`
+  - 例: `invoke_gemini.py`（画像1枚）、`invoke_gemini_with_movie.py`（動画1本）
+- 共通の処理フロー: 入力読み込み → Geminiに送信 → 構造化出力をパース → 結果表示・保存
 - プロンプトモジュールは `import src.input_prompts.xxx as ip` でインポート
+- コマンドライン引数は `--input_path`, `--output_path`, `--max_tokens`, `--temperature`, `--top_p` を基本とする
 
 ### 環境変数
 - `.env` ファイルに設定
@@ -30,12 +32,17 @@ Google Gemini API を使用した画像・動画分析プロジェクト
 
 ## ファイル構成
 ```
-src/
-├── main.py                      # 動作確認用
-├── invoke_gemini.py             # 画像分析
-├── invoke_gemini_with_movie.py  # 動画分析
-├── utils.py                     # 共通設定
-└── input_prompts/               # プロンプト定義
+├── myrun.sh                       # 実行用シェルスクリプト
+├── .env.example                   # 環境変数テンプレート
+└── src/
+    ├── __init__.py
+    ├── main.py                    # 動作確認用
+    ├── invoke_gemini.py           # 画像分析
+    ├── invoke_gemini_with_movie.py # 動画分析
+    ├── utils.py                   # 共通設定
+    └── input_prompts/             # プロンプト定義
+        ├── __init__.py
+        └── input_prompt_for_xxx.py
 ```
 
 ## 構造化出力

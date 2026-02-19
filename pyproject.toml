@@ -1,7 +1,7 @@
 [project]
 name = "gemini-workspace"
 version = "0.1.0"
-description = "Add your description here"
+description = "Google Gemini API を使用した画像・動画分析ツール"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [

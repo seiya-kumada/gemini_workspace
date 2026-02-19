@@ -4,6 +4,11 @@ Google Gemini API を使用した画像・動画分析プロジェクト。
 
 ## セットアップ
 
+### 前提条件
+
+- Python >= 3.14
+- [uv](https://docs.astral.sh/uv/) パッケージマネージャ
+
 ### 1. 依存関係のインストール
 
 ```bash
@@ -12,7 +17,13 @@ uv sync
 
 ### 2. 環境変数の設定
 
-`.env` ファイルを作成し、以下を設定：
+`.env.example` をコピーして `.env` を作成し、APIキーを設定：
+
+```bash
+cp .env.example .env
+```
+
+`.env` を編集して `GEMINI_API_KEY` を設定：
 
 ```
 GEMINI_API_KEY=your-api-key-here
@@ -47,27 +58,50 @@ uv run python -m src.invoke_gemini_with_movie \
     --max_tokens 8192
 ```
 
+### 2枚の画像を分析
+
+```bash
+uv run python -m src.invoke_gemini_with_two_images \
+    --input_path_1 /path/to/first_image.jpg \
+    --input_path_2 /path/to/second_image.jpg \
+    --output_path /path/to/output.txt \
+    --max_tokens 8192
+```
+
+### 画像＋動画を分析
+
+```bash
+uv run python -m src.invoke_gemini_with_image_and_movie \
+    --image_path /path/to/image.jpg \
+    --movie_path /path/to/video.mp4 \
+    --output_path /path/to/output.txt \
+    --max_tokens 8192
+```
+
 ### 共通オプション引数
 
 | 引数 | 説明 | デフォルト |
 |------|------|----------|
-| `--input_path` | 入力ファイルのパス（必須） | - |
 | `--output_path` | 出力テキストファイルのパス（必須） | - |
 | `--max_tokens` | 最大出力トークン数 | 8192 |
 | `--temperature` | 温度パラメータ（0.0-2.0、低いほど確定的） | None |
 | `--top_p` | 核サンプリングパラメータ（0.0-1.0） | None |
+
+入力ファイルの引数はモジュールにより異なります（`--input_path`, `--input_path_1`/`--input_path_2`, `--image_path`/`--movie_path`）。
 
 ## プロジェクト構成
 
 ```
 gemini_workspace/
 ├── src/
-│   ├── main.py                      # 動作確認用シンプルチャット
-│   ├── invoke_gemini.py             # 画像分析メイン処理
-│   ├── invoke_gemini_with_movie.py  # 動画分析メイン処理
-│   ├── utils.py                     # 設定・ユーティリティ
-│   └── input_prompts/               # プロンプト定義
-│       ├── input_prompt_for_xxx.py  # 各タスク用プロンプト
+│   ├── main.py                                # 動作確認用シンプルチャット
+│   ├── invoke_gemini.py                       # 画像1枚の分析
+│   ├── invoke_gemini_with_movie.py            # 動画1本の分析
+│   ├── invoke_gemini_with_two_images.py       # 画像2枚の分析
+│   ├── invoke_gemini_with_image_and_movie.py  # 画像＋動画の分析
+│   ├── utils.py                               # 設定・ユーティリティ
+│   └── input_prompts/                         # プロンプト定義
+│       ├── input_prompt_for_xxx.py            # 各タスク用プロンプト
 │       └── ...
 ├── .env                             # 環境変数（git管理外）
 ├── pyproject.toml                   # プロジェクト設定
@@ -89,6 +123,9 @@ gemini_workspace/
 - AVI (.avi)
 - MKV (.mkv)
 - WebM (.webm)
+- FLV (.flv)
+- WMV (.wmv)
+- 3GP (.3gp)
 - その他（最大10MB程度）
 
 ## 利用可能なモデル
