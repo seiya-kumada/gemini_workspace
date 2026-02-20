@@ -19,6 +19,7 @@ class Output(BaseModel):
     process_prediction: str = Field(description="物体を製造するためのプロセスの予測。")
     risk_description: str = Field(description="物体の構造的リスクの説明。")
     material_description: str = Field(description="構造や構造的リスクから予測される最適な材質・材料の説明。")
+    cost_description: str = Field(description="構造や材質から予測される原価（単位は円）の説明。")
 
 
 # 画像とOCR結果を入力とする場合のプロンプト
@@ -49,6 +50,7 @@ def print_output(output: Output):
     print(f"【製造プロセスの予測】{output.process_prediction}")
     print(f"【構造的リスクの説明】{output.risk_description}")
     print(f"【材質・材料の説明】{output.material_description}")
+    print(f"【原価の説明】{output.cost_description}")
     print("=======================")
 
 
@@ -66,3 +68,4 @@ def save_to_file(output: Output, output_path: str):
         f.write(f"【製造プロセスの予測】{output.process_prediction}\n")
         f.write(f"【構造的リスクの説明】{output.risk_description}\n")
         f.write(f"【材質・材料の説明】{output.material_description}")
+        f.write(f"【原価の説明】{output.cost_description}\n")
