@@ -7,11 +7,13 @@ Geminiへの入力プロンプトとレスポンスモデルの定義
 
 from pydantic import BaseModel, Field
 
+
 class Output(BaseModel):
     """
     Geminiからのレスポンスモデル
 
     """
+
     structured_description: str = Field(description="物体の形状や構造についての詳細な説明。色や材質には言及しない。")
 
 
@@ -50,4 +52,5 @@ def save_to_file(output: Output, output_path: str):
         output_path: 出力テキストファイルのパス
     """
     with open(output_path, "w") as f:
+        f.write(f"【構造の説明】{output.structured_description}\n")
         f.write(f"【構造の説明】{output.structured_description}\n")
