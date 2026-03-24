@@ -12,7 +12,7 @@ import os
 from google import genai
 from google.genai import types
 
-import src.input_prompts.input_prompt_for_Cam_gear as ip
+import src.input_prompts.input_prompt_for_Cam_gear_2 as ip
 import src.utils as utils
 
 
